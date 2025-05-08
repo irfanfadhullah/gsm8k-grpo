@@ -27,7 +27,8 @@ class TrainingConfig:
         lora_dropout=0.05,
         bias="none",
         task_type="CAUSAL_LM",
-        target_modules=["q_proj", "k_proj", "v_proj", "o_proj"]
+        target_modules=["q_proj", "k_proj", "v_proj", "o_proj"],
+        base_model_name_or_path="Qwen/Qwen2.5-1.5B-Instruct"
     ))
     
     # Dataset configuration

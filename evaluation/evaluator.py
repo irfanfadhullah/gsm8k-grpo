@@ -5,7 +5,7 @@ from tqdm import tqdm
 from typing import Dict, List, Any, Callable, Optional
 from datasets import Dataset
 from transformers import AutoModelForCausalLM, AutoTokenizer
-from ..utils.text_processing import extract_xml_answer, extract_hash_answer
+from utils.text_processing import extract_xml_answer, extract_hash_answer
 
 
 class ModelEvaluator:
@@ -55,14 +55,20 @@ class ModelEvaluator:
         
         # Process in batches
         for i in tqdm(range(0, len(dataset), batch_size)):
-            batch = dataset[i:min(i+batch_size, len(dataset))]
+            batch = [dataset[j] for j in range(i, min(i+batch_size, len(dataset)))]
+
+            # batch = dataset[i:min(i+batch_size, len(dataset))]
             
             # Format inputs
+            # prompts = [
+            #     [
+            #         {"role": "system", "content": self.system_prompt},
+            #         {"role": "user", "content": item["question"]}
+            #     ] 
+            #     for item in batch
+            # ]
             prompts = [
-                [
-                    {"role": "system", "content": self.system_prompt},
-                    {"role": "user", "content": item["question"]}
-                ] 
+                item["prompt"]  # This already contains the system prompt and user question
                 for item in batch
             ]
             

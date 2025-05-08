@@ -103,3 +103,5 @@ eval_dataset = get_gsm8k_dataset(split="test", max_samples=100)
 results = evaluator.evaluate_dataset(eval_dataset)
 print(f"Accuracy: {results['accuracy']:.2%}")
 ```
+
+<div style="text-align: center">⁂</div>
